@@ -1,0 +1,284 @@
+@import "font"
+@import "vars"
+
+.container
+  max-width: 1200px
+  margin: 0 auto
+  padding: 0 15px
+
+// header
+
+.header__main
+  padding: 15px 0 0 0
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+
+  .main__logo
+    width: 50%
+    display: flex
+    align-items: center
+    justify-content: flex-start
+
+    img
+      display: block
+      max-width: 125px
+
+  .main__menu
+    display: flex
+    width: 50%
+    justify-content: flex-end
+
+    .menu__list
+      padding: 0
+      margin: 0
+      list-style-type: none
+
+      li
+        display: inline-block
+
+
+        a
+          color: #2644A6
+          display: block
+          padding: 9px 27px
+          transition: all .3s
+          position: relative
+
+          &:hover
+            color: #2C18A6
+
+        .login
+          background: #7180F5
+          border-radius: 5px
+          transition: all .3s
+          color: #fff
+
+          &:hover
+            color: #fff
+            background: #5A6BEF
+
+// main page
+
+.header__screen
+  display: flex
+  align-items: center
+  justify-content: space-between
+  width: 100%
+  font-family: $base-font
+  font-weight: normal
+  padding: 3em 0
+  //height: calc(100vh - 53px)
+
+  .main__text
+    width: 50%
+
+    h1
+      font-size: 50px
+      line-height: 60px
+      color: #323BA5
+      font-family: $base-font
+      font-weight: 700
+
+    h4
+      font-size: 20px
+      line-height: 30px
+      font-family: $base-color
+      font-weight: 500
+
+.main__text--btn
+  background: linear-gradient(to right, #6973eb 0%, #2846a8 100%)
+  color: #fff
+  padding: 15px 25px
+  border-radius: 3px
+  margin-top: 5px
+  display: inline-block
+  font-size: 16px
+  transition: all .1s linear
+  font-family: $base-font
+  font-weight: 500
+  box-shadow: 0 7px 0 0 rgba(50, 59, 165, 1)
+
+  &:hover
+    background-color: #281CA6
+    transform: translateY(2px)
+    box-shadow: 0 5px 0 0 rgba(50, 59, 165, 1)
+    color: #fff
+
+  span
+    display: inline-block
+    margin-right: 10px
+
+.main__chat
+  width: 50%
+  display: flex
+  justify-content: center
+
+  img
+    display: block
+    padding: 20px 0 80px 0
+    max-width: 525px
+    width: 100%
+    height: 100%
+
+
+// automation
+
+.automation
+  //background-color: #6973EB
+  background: linear-gradient(to right, #6973eb 0, #2846a8 100%)
+  padding: 7em 0 7em 0
+
+.automation__content
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+
+  .content--text
+    width: 50%
+    display: flex
+    align-items: center
+
+    h2
+      font-size: 40px
+      color: white
+      font-weight: bold
+      font-family: $base-font
+
+    p
+      color: white
+      font-size: 21px
+      margin: 0
+      font-weight: 500
+      line-height: 26px
+      font-family: $base-font
+
+  .content--block
+    width: 50%
+
+    .block__create
+      max-width: 499px
+      background-color: #FFF
+      padding: 20px 15px
+      position: relative
+      border-radius: 3px
+      box-shadow: 17px 15px 0 0 #323ba5
+
+      h3
+        font-size: 33px
+        font-weight: 700
+        font-family: $base-font
+
+      p
+        color: #5E5E5E
+        font-family: $base-font
+        font-weight: 500
+        font-size: 16px
+
+      &:before
+        content: ''
+        -webkit-background-size: 56px 56px
+        background: url(/img/plus.png) no-repeat center center
+        background-size: 56px 56px
+        position: absolute
+        top: 20px
+        right: 70px
+        width: 56px
+        height: 47px
+
+    .block__control
+      max-width: 499px
+      margin: 40px 0 0 30px
+      background-color: #FFF
+      padding: 20px 15px
+      position: relative
+      border-radius: 3px
+      box-shadow: 17px 15px 0 0 #323ba5
+
+      h3
+        font-family: $base-font
+        font-size: 35px
+        font-weight: 700
+
+      p
+        color: #5E5E5E
+        font-size: 16px
+        font-weight: 500
+        font-family: $base-font
+
+      &:before
+        content: ''
+        background: url(/img/setting_plus.png) no-repeat center center
+        position: absolute
+        top: 20px
+        right: 20px
+        width: 90px
+        height: 47px
+
+
+// Service
+
+.service
+  padding: 8em 0
+
+  h2
+    font-size: 50px
+    line-height: 60px
+    font-weight: 700
+    color: $base-color
+    font-family: $base-font
+
+
+// Footer
+
+.footer__main
+  border-top: 1px solid $base-color
+  padding: 2em 0
+
+  .footer__up
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  span
+    color: black
+    font-family: $base-font
+    font-weight: 500
+
+.footer__link
+  color: black
+  display: flex
+  align-items: center
+
+  .logo
+    margin-right: 35px
+
+    img
+      display: block
+      max-width: 125px
+
+.up__list
+  display: flex
+  list-style-type: none
+  padding: 0
+  margin: 0
+
+  li
+    margin-right: 10px
+
+    a
+      color: black
+      font-family: $base-font
+      font-weight: 500
+      transition: all .3s
+
+      &:hover
+        color: $base-color
+        text-decoration: underline
+
+  .footer__bottom
+    margin-top: 15px
+
+    span
+      font-size: 11px
+      color: rgba(255, 255, 255, .5)

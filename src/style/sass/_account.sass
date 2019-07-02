@@ -1,0 +1,137 @@
+.reveive
+  margin-bottom: 30px
+  margin-top: 30px
+
+.receive__event
+  display: block
+  padding: 0 0 10px 0
+
+
+// account
+.account__overlay
+  padding: 20px 0 0 0
+
+// component Activator
+
+.activeOff
+  display: none !important
+
+.activator
+  padding: 20px 10px 30px 10px
+  border: 1px solid #DEE2E4
+  margin: 42px 24px 14px 24px
+  display: flex
+  justify-content: center
+
+  .activator__overlay
+    text-align: center
+
+    .overlay__text
+      text-align: left
+      padding: 0 33px
+
+  .activator__header
+    font-size: 16px
+    line-height: 20px
+    font-weight: 600
+    color: black
+    margin-bottom: 15px
+    display: block
+
+  .activator__price
+    //padding: 10px 0
+
+    .price__text
+      font-size: 14px
+      line-height: 24px
+
+    .price__number
+      font-size: 30px
+      line-height: 32px
+      color: #42A500
+      font-weight: 500
+
+    .error
+      color: red
+      display: block
+      padding: 10px 0
+
+.activator__btn
+  padding: 12px 15px
+  cursor: pointer
+  border-radius: 3px
+  border: 1px solid #1890ff
+  color: #1890ff
+  background: #fff
+  display: inline-block
+  transition: all .3s
+  margin-bottom: 10px
+
+  &:hover
+    background: #1890ff
+    color: #fff
+
+  &:focus
+    outline: none
+
+.activator__popup
+  padding: 30px 0 20px 0
+
+  .popup__text
+    text-align: center
+    font-weight: 500
+    line-height: 32px
+    font-size: 25px
+    color: black
+
+// component balance
+.account__balance
+
+  .balance__money
+    border-bottom: 1px solid #DEE2E4
+    margin-bottom: 20px
+    padding-bottom: 5px
+
+    .balance__text
+      font-size: 16px
+      line-height: 24px
+
+    .balance__number
+      font-size: 25px
+      color: #42A500
+      font-weight: 500
+
+// component history
+.history__list
+  padding: 0
+  margin: 0
+
+  .history__item
+    padding: 10px 0
+    width: 100%
+    display: flex
+    justify-content: space-between
+    border-left: 1px solid #DEE2E4
+    border-top: 1px solid #DEE2E4
+    border-right: 1px solid #DEE2E4
+
+    &:last-child
+      border-bottom: 1px solid #DEE2E4
+
+    .column
+      width: 33%
+      text-align: center
+
+    .item__date
+      padding-left: 20px
+      text-align: left
+
+    .item__money
+      font-size: 16px
+      font-weight: 500
+
+      .plus
+        color: #42A500
+
+      .minus
+        color: red
