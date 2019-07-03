@@ -79,8 +79,8 @@ class Setting extends Component {
     const { background, previewText, backgroundBtn } = this.state;
     const botid = this.props.bot && this.props.bot._id;
     const query = `?bots=${encodeURIComponent(JSON.stringify(botid))}`;
-    const src = `https://manage-bot.herokuapp.com/bots.html${query}`;
-    const script_src = `https://manage-bot.herokuapp.com/widget.js`;
+    const src = `https://newbotpublic.herokuapp.com/bots.html${query}`;
+    const script_src = `https://newbotpublic.herokuapp.com/widget.js`;
     const code = `<!--Bot manager widget-->
 <script src="${script_src}" data-preview="${previewText}"  data-background="${background}" data-btn="${backgroundBtn}" widget="${src}" type="text/javascript"></script>
 <!--Bot manager widget-->`;
