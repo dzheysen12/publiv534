@@ -1,6 +1,6 @@
 var src = document.currentScript.getAttribute('widget');
 var buttonText = document.currentScript.getAttribute('buttontext');
-var buttonColor = document.currentScript.getAttribute('buttoncolor');
+var buttonColor = document.currentScript.getAttribute('data-btn');
 var widgetColor = document.currentScript.getAttribute('data-background');
 var previewText = document.currentScript.getAttribute('data-preview');
 
@@ -12,7 +12,7 @@ const inframeMain = (`
     box-shadow: 1px 1px 100px 2px rgba(0, 0, 0, 0.22);
     transition: all .2s ease-in-out;
     bottom: 55px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
     flex-direction: column;"
     
     id="div__botkits" class="widget__main--inframe">
@@ -42,7 +42,7 @@ showButton.style.cssText = `
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background-color: #323ba5;
+  background-color: ${buttonColor};
   cursor: pointer;
   traisition: box-shadow .2s ease-in;
   border: none;`;
@@ -102,16 +102,21 @@ closeButton.style.cssText = `border: none;
 
 // Показать Inframe
 
+console.log(buttonColor);
+
 widgetButton.addEventListener("mouseover", () => {
-  widgetButton.style.backgroundColor = "rgb(36, 44, 137)";
+  widgetButton.style.backgroundColor = buttonColor;
+  widgetButton.style.opacity = "0.9";
 }, false);
 
 widgetButton.addEventListener("mouseout", () => {
-  widgetButton.style.backgroundColor = "#323ba5";
+  widgetButton.style.opacity = "1";
 }, false);
 
 widgetButton.addEventListener("mousemove", () => {
   widgetButton.style.outline = "none";
+  widgetButton.style.opacity = "0.8";
+
 }, false);
 
 const onShowIframeHandler =  () => {

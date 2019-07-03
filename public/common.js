@@ -1,17 +1,11 @@
-const mainChat = document.querySelector('.wrap__chat--main');
-const chatPopover = document.getElementById("chat__popover");
-const iconCross = document.querySelector('.icon__cross');
-const iconChat = document.getElementById('icon__chat');
-const form = document.querySelector('.form');
-const messageInput = document.querySelector('.message__send--input');
 const messageList = document.querySelector('.wrap__message--list');
-const messageBtn = document.querySelector('.message__send--btn');
 const messageSendInput = document.querySelector('.message__send--input');
 
+var message;
+var messageLocale = localStorage["Ключ"];
+var localValue;
 
-var address = document.location.href;
-var message = [];
-
+var messageListLocal = [];
 
 function searchToObj(search) {
   var search = search || window.location.search.substring(1);
@@ -38,6 +32,67 @@ if (params.bots && typeof params.bots === 'string') {
 const messageReception = (message) => {
   return message;
 };
+
+
+// Шаблон отправки сообщения user
+
+messageSendInput.addEventListener("keyup", function(event, data, url) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+
+
+    var data
+//debugger
+    let src = 'https://dfgfdfgdf.herokuapp.com/webhook/send_message';
+    let date = new Date();
+    var messageValue = messageSendInput.value;
+
+    fetch(src, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        botid: bots,
+        text: messageValue
+      })
+    }).then(res => res.json())
+      .then(res => {
+        message = res.data;
+      });
+
+
+    if (messageValue.trim() === '') {
+      return false;
+    }
+
+    if (messageValue ) {
+      messageList.insertAdjacentHTML("beforeEnd", `
+    <div class="list-item flex-start">
+      <div class="message">
+        <div class="text__message you">
+          ${messageValue}
+        </div>
+
+        <div class="date__message">
+          ${date.getHours()}:${date.getMinutes()}
+        </div>
+      </div>
+    </div>`);
+    }
+
+    else if(messageValue !== '') {
+      return false;
+    }
+    messageSendInput.value = '';
+    setTimeout(() => {
+      onScrollToBottom();
+      onMessageBotHandler();
+    }, 600 );
+  }
+});
+
 
 // Шаблон отправки сообщения ботом
 onMessageBotHandler = () => {
@@ -66,89 +121,17 @@ onMessageBotHandler = () => {
      </div>
     </div>`);
 
-  }, 1000 + (Math.random() * 20) * 100);
+  }, 600);
 };
 
-// Шаблон отправки сообщения user
-
-onMessageTemplateHandler = (e, data, url) => {
-  e.preventDefault();
-//debugger
-  let src = 'https://dfgfdfgdf.herokuapp.com/webhook/send_message';
-
-  let date = new Date();
-  var messageValue = messageSendInput.value;
-
-  fetch(src, {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      botid: this.bots,
-      text: messageValue
-    })
-  }).then(res => res.json())
-    .then(res => {
-     message = res.data
-      console.log(res.data)
-    });
-
-  if (messageValue.trim() === '') {
-    return false;
-  }
-//debugger
-  if (messageValue ) {
-    messageList.insertAdjacentHTML("beforeEnd", `
-    <div class="list-item flex-start">
-      <div class="message">
-        <div class="text__message you">
-          ${messageValue}
-        </div>
-
-        <div class="date__message">
-          ${date.getHours()}:${date.getMinutes()}
-        </div>
-      </div>
-    </div>`);
-  }
-
-  else if(messageValue !== '') {
-    return false;
-  }
-  setTimeout(() => {
-    onMessageBotHandler();
-  }, 1000 + (Math.random() * 10) * 100);
-
-
-};
 
 // Сообщения прилепают вниз
-
 onScrollToBottom = () => {
-
   messageList.maxScrollTop = messageList.scrollHeight - messageList.offsetHeight;
   if (messageList.maxScrollTop - messageList.scrollTop <= messageList.offsetHeight) {
     messageList.scrollTop = messageList.scrollHeight;
   }
 };
-
-//  при нажатии клавиши если value > 0 добавляется класс
-
-// onKeyHandler = () => {
-//  var test =  messageValue;
-//  console.log(test);
-//    if (test => 0) {
-//      $('.message__send--btn').addClass("circle");
-//    }
-// };
-
-//document.addEventListener('DOMContentLoaded',onMessageBotHandler);
-messageBtn.addEventListener('click', onMessageTemplateHandler);
-form.addEventListener('submit', onMessageTemplateHandler);
-form.addEventListener('submit', onScrollToBottom);
-
 
 
 

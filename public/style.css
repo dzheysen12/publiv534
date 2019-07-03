@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Arial;
     font-size: 13px;
     margin: 0;
 }
@@ -128,7 +126,7 @@ body {
 }
 
 .message__send--input {
-    padding: 15px 50px 15px 15px;
+    padding: 15px 50px 0 15px;
     width: 100%;
     position: relative;
     font-size: 13px;
