@@ -78,7 +78,7 @@ class Setting extends Component {
 
   onEditBotHandler = () => {
     const botid = this.props.bot._id;
-    
+
     this.props.form.validateFields(
         (err, values) => {
           if (!err) {
@@ -93,11 +93,11 @@ class Setting extends Component {
     const { background, previewText, backgroundBtn } = this.state;
     const botid = this.props.bot && this.props.bot._id;
     const query = `?bots=${encodeURIComponent(JSON.stringify(botid))}`;
-    
-    const src = `http://localhost:3000/bots.html${query}`;
-    const script_src = `http://localhost:3000/widget.js`;
-    // const src = `https://newbotpublic.herokuapp.com/bots.html${query}`;
-    // const script_src = `https://newbotpublic.herokuapp.com/widget.js`;
+
+    //const src = `http://localhost:3000/bots.html${query}`;
+    //const script_src = `http://localhost:3000/widget.js`;
+    const src = `https://newbotpublic.herokuapp.com/bots.html${query}`;
+    const script_src = `https://newbotpublic.herokuapp.com/widget.js`;
     const code = `<!--Bot manager widget-->
 <script src="${script_src}" data-preview="${previewText}"  data-background="${background}" data-btn="${backgroundBtn}" widget="${src}" type="text/javascript"></script>
 <!--Bot manager widget-->`;
@@ -143,7 +143,7 @@ class Setting extends Component {
   };
 
   render(){
-    // let employees = this.props.employees && this.props.employees; 
+    // let employees = this.props.employees && this.props.employees;
     // const { selectedEmployees } = this.state;
     const {background, previewText} = this.state;
     const botid = this.props.match.params.id && this.props.match.params.id;
