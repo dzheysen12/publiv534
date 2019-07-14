@@ -180,12 +180,6 @@ class Users extends Component {
   };
 };
 
-
-
-
-
-
-
 const mapStateToProps = state => ({
     users: getUsersList(state),
 });

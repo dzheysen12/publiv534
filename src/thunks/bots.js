@@ -63,13 +63,14 @@ export const deleteBot = (id) => (dispatch) => {
   });
 };
 
-export const editBot = (values, botid, empoloyees) => dispatch => {
+export const editBot = (values, botid, employees_is_empty) => dispatch => {
   dispatch(setStatus(statuses.LOADING));
   Bots.edit({
       name: values.name,
       description: values.description,
       botid: botid,
-      empoloyees: empoloyees
+      employees: values.employees,
+      employees_is_empty: employees_is_empty
     }, () => {
         dispatch(setStatus(statuses.SUCCESS));
         dispatch(setStatus(statuses.NOT_INITIALIZED));

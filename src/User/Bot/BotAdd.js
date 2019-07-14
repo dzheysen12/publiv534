@@ -6,6 +6,8 @@ import { showModalWindow } from "../../actions/bots";
 import { getUserObject } from "../../selectors/user";
 import { showAddWindow } from "../../selectors/bots";
 
+
+// const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -33,7 +35,7 @@ class Add extends Component {
     this.props.form.resetFields();
   };
 
-  render() {
+  render() {    
     const { getFieldDecorator } = this.props.form;
 
     return (
@@ -93,10 +95,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = ({
   addBot,
-  showModalWindow
+  showModalWindow,
 });
 
 const ConnectedAdd = connect(mapStateToProps, mapDispatchToProps)(Add);
 
 const WrappedDynamicRule = Form.create()(ConnectedAdd);
 export default WrappedDynamicRule
+
+

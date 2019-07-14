@@ -1,6 +1,6 @@
 import  React, { Component }  from  'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {CirclePicker} from "react-color";
 import 'moment/locale/ru';
@@ -10,14 +10,18 @@ import { setBotForEdit } from '../../../actions/bots';
 import { editBot, setBot, getBots } from '../../../thunks/bots';
 import { getBotForEdit, getBotsList } from '../../../selectors/bots';
 import { getUserObject } from '../../../selectors/user';
+import { getEmployeesList } from '../../../selectors/employees';
+import { getEmployees } from '../../../thunks/employees';
 
 
 const FormItem = Form.Item;
+const Option = Select.Option;
 const { TextArea } = Input;
 
 class Setting extends Component {
 
   state = {
+    selectedEmployees: [],
     value: '',
     copied: false,
     background: 'rgb(50, 59, 165)',
@@ -28,6 +32,9 @@ class Setting extends Component {
   componentDidMount() {
     this.props.setBotForEdit(this.props.match.params.id);
     this.props.setBot(this.props.match.params.id);
+    if (!this.props.employees.length) {
+      this.props.getEmployees()
+    };
   };
 
   componentWillUnmount() {
@@ -38,6 +45,10 @@ class Setting extends Component {
     if (this.props.bot !== prevProps.bot) {
       this.setDataInForm(this.props.bot);
     }
+  };
+
+  handleChange = selectedEmployees => {
+    this.setState({ selectedEmployees });
   };
 
   onColorCheckHandler = (color) => {
@@ -61,16 +72,19 @@ class Setting extends Component {
     this.props.form.setFieldsValue({
       name: bot.name,
       description: bot.description,
+      employees: (bot.employees || []).map(employee => employee._id),
     });
   };
 
   onEditBotHandler = () => {
     const botid = this.props.bot._id;
-    let employees = this.props.bot.employees;
+    
     this.props.form.validateFields(
         (err, values) => {
           if (!err) {
-          this.props.editBot(values, botid, employees)
+          let employees_is_empty;
+          values.employees.length > 0 ? employees_is_empty = undefined : employees_is_empty = true
+          this.props.editBot(values, botid, employees_is_empty)
           }
     })
   };
@@ -79,8 +93,11 @@ class Setting extends Component {
     const { background, previewText, backgroundBtn } = this.state;
     const botid = this.props.bot && this.props.bot._id;
     const query = `?bots=${encodeURIComponent(JSON.stringify(botid))}`;
-    const src = `https://newbotpublic.herokuapp.com/bots.html${query}`;
-    const script_src = `https://newbotpublic.herokuapp.com/widget.js`;
+    
+    const src = `http://localhost:3000/bots.html${query}`;
+    const script_src = `http://localhost:3000/widget.js`;
+    // const src = `https://newbotpublic.herokuapp.com/bots.html${query}`;
+    // const script_src = `https://newbotpublic.herokuapp.com/widget.js`;
     const code = `<!--Bot manager widget-->
 <script src="${script_src}" data-preview="${previewText}"  data-background="${background}" data-btn="${backgroundBtn}" widget="${src}" type="text/javascript"></script>
 <!--Bot manager widget-->`;
@@ -126,10 +143,15 @@ class Setting extends Component {
   };
 
   render(){
-
+    // let employees = this.props.employees && this.props.employees; 
+    // const { selectedEmployees } = this.state;
     const {background, previewText} = this.state;
     const botid = this.props.match.params.id && this.props.match.params.id;
     const { getFieldDecorator } = this.props.form;
+    var employees = this.props.employees.map(employee => {
+      return (<Option key={employee._id} value={employee._id}>{employee.name}</Option>);
+    });
+
 
     const content = (
       <div>
@@ -169,6 +191,19 @@ class Setting extends Component {
                   }} />
                 )}
               </FormItem>
+              <FormItem label={"Сотрудники"}>
+              {getFieldDecorator('employees', {
+
+              })(
+                <Select
+                  size="large"
+                  mode="multiple"
+                  style={{ width: '100%' }}
+                  >
+                  {employees}
+                </Select>
+              )}
+            </FormItem>
             </Form>
             <div className="widget__chat--color">
               <FormItem label={"Заголовок превью"}>
@@ -219,14 +254,16 @@ class Setting extends Component {
 const mapStateToProps = state => ({
   user: getUserObject(state),
   bots: getBotsList(state),
-  bot: getBotForEdit(state)
+  bot: getBotForEdit(state),
+  employees: getEmployeesList(state)
 });
 
 const mapDispatchToProps = ({
   setBotForEdit,
   editBot,
   setBot,
-  getBots
+  getBots,
+  getEmployees
 });
 
 const ConnectedPositionEdit = withRouter(connect(mapStateToProps, mapDispatchToProps)(Setting));

@@ -30,7 +30,7 @@ export const getPositionForEdit = (id) => dispatch => {
     });
 };
 
-export const editPosition = (values, positionid, schedule) => dispatch => {
+export const editPosition = (values, positionid, schedule, services_is_empty) => dispatch => {
   dispatch(setStatus(statuses.LOADING));
   Positions.edit({
     positionid: positionid,
@@ -38,7 +38,8 @@ export const editPosition = (values, positionid, schedule) => dispatch => {
     description: values.description,
     name: values.name,
     serviceTime: values.serviceTime,
-    services: values.services
+    services: values.services,
+    services_is_empty: services_is_empty
   }, () => {
       dispatch(setStatus(statuses.SUCCESS));
       dispatch(setStatus(statuses.NOT_INITIALIZED));

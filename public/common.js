@@ -43,7 +43,7 @@ messageSendInput.addEventListener("keyup", function(event, data, url) {
 
     var data
 //debugger
-    let src = 'https://dfgfdfgdf.herokuapp.com/webhook/send_message';
+    let src = 'http://localhost:4800/webhook/send_message';
     let date = new Date();
     var messageValue = messageSendInput.value;
 
@@ -98,6 +98,16 @@ messageSendInput.addEventListener("keyup", function(event, data, url) {
 onMessageBotHandler = () => {
 
   let date = new Date();
+  var minutes =  date.getMinutes();
+  let timeNode;
+  console.log(timeNode);
+   if (minutes < 10) {
+     minutes = `${0}${minutes}`
+
+   }
+   if(minutes > 10) {
+     minutes
+   }
 
   setTimeout(() => {
     messageList.insertAdjacentHTML("beforeEnd", `
@@ -114,7 +124,7 @@ onMessageBotHandler = () => {
              </div>
 
              <div class="date__message">
-             ${date.getHours()}:${date.getMinutes()}
+             ${date.getHours()}:${minutes}
              </div>
            </div>
        </div>

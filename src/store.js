@@ -1,5 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import statusesReducer from './reducers/statuses';
 import userReducer from './reducers/user';
 import servicesReducer from './reducers/services';
@@ -25,7 +26,7 @@ const rootReducer = combineReducers({
 });
 
 const configureStore = () => {
-   return createStore(rootReducer, applyMiddleware(thunk));
+  return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 };
 
 export default configureStore;

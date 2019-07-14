@@ -9,6 +9,7 @@ import { getBots, deleteBot } from '../../thunks/bots';
 import { getBotsList } from '../../selectors/bots';
 import { setBotForEdit } from '../../actions/bots';
 import { getUserObject } from '../../selectors/user';
+import { getEmployeesList } from '../../selectors/employees';
 
 
 class BotList extends Component {
@@ -16,7 +17,7 @@ class BotList extends Component {
   componentDidMount () {
     if (!this.props.bots.length) {
       this.props.getBots()
-    }
+    };
   };
 
   onDeleteBotHandler = (e) => {
@@ -27,7 +28,6 @@ class BotList extends Component {
   render() {
     let bots = this.props.bots && this.props.bots,
       data = bots.length;
-
     const columns = [
       {
         title: 'Название',
@@ -66,7 +66,7 @@ class BotList extends Component {
                 lg={24}
                 md={24}
                 xl={18}>
-                <Popup />
+                <Popup/>
 
                 <Table
                   bordered
@@ -81,7 +81,7 @@ class BotList extends Component {
             <div className={"data__main--column"}>
               <NoData/>
               <span style={{padding: "10px 0"}}>У вас пока нет ни одного бота</span>
-              <Popup />
+              <Popup employees={this.props.employees}/>
             </div>
           </div>
         }
@@ -98,6 +98,7 @@ class BotList extends Component {
 
 const mapStateToProps = state => {
   return {
+    employees: getEmployeesList(state),
     user: getUserObject(state),
     bots: getBotsList(state),
   }
@@ -106,7 +107,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = ({
   deleteBot,
   getBots,
-  setBotForEdit
+  setBotForEdit,
 });
 
 const ConnectedPosition= connect(mapStateToProps, mapDispatchToProps)(BotList);

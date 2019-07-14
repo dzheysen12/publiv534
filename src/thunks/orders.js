@@ -61,7 +61,6 @@ export const deleteOrder = (id) => (dispatch) => {
 
 export const editOrder = (values, crm_orderid, orderTime) => dispatch => {
   dispatch(setStatus(statuses.LOADING));
-  debugger
     Orders.edit({
         name: values.name,
         contacts: values.contacts,

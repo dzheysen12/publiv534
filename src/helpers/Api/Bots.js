@@ -36,10 +36,11 @@ class Bots extends API {
     };
 
     this.edit = (data, successCallback, errorCallback) => {
+      debugger
       data = data || {};
       const endPoint = 'bot/edit';
       const auth = super.getAuthToken(data);
-      let required = ['name', 'description', 'botid', 'employees'];
+      let required = ['name', 'description', 'botid'];
 
       // if (super.checkError403(auth, errorCallback)) return;
       // if (super.checkError901(auth, errorCallback)) return;

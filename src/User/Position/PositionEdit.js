@@ -104,8 +104,11 @@ class PositionEdit extends Component {
           serviceTime: values.serviceTime
         };
 
+        
+        let services_is_empty;
+          values.services.length > 0 ? services_is_empty = undefined : services_is_empty = true;
         if (!!this.props.position && this.state.flag) {
-          this.props.editPosition(values, positionid, schedule);
+          this.props.editPosition(values, positionid, schedule, services_is_empty);
           } else {
             this.props.addPosition(values, schedule);
         }
